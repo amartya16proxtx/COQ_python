@@ -1,4 +1,4 @@
-import google.generativeai as genai
+ficimport google.generativeai as genai
 from datasets import load_dataset
 import os
 from dotenv import load_dotenv
@@ -100,5 +100,5 @@ with open(verification_log, "w") as log_file:
         result = subprocess.run(coqc_command, check=True, stdout=log_file, stderr=log_file, text=True)
         print(f"✅ Coq verification successful! The proof is valid.\n")
     except subprocess.CalledProcessError:
-        print(f"❌ Coq verification failed! Check {verification_log} for details.\n")
+        print(f"❌ Coq verification failed! Check {verification_log} for details. \n")
 
