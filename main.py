@@ -1,4 +1,4 @@
-ficimport google.generativeai as genai
+import google.generativeai as genai
 from datasets import load_dataset
 import os
 from dotenv import load_dotenv
