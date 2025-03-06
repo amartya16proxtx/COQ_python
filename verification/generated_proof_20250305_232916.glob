@@ -1,0 +1,43 @@
+DIGEST ffde0f7fe4868782368bc372182e2611
+Fgenerated_proof_20250305_232916
+R25:27 Cdcl.Lib <> <> lib
+R29:34 Cdcl.Syntax <> <> lib
+R36:38 Cdcl.Lit <> <> lib
+def 53:54 <> id
+binder 57:57 <> A:1
+R65:65 generated_proof_20250305_232916 <> A:1 var
+binder 61:61 <> x:2
+R70:70 generated_proof_20250305_232916 <> A:1 var
+R75:75 generated_proof_20250305_232916 <> x:2 var
+def 90:93 <> comp
+binder 96:96 <> A:3
+binder 98:98 <> B:4
+binder 100:100 <> C:5
+R109:112 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R108:108 generated_proof_20250305_232916 <> B:4 var
+R113:113 generated_proof_20250305_232916 <> C:5 var
+binder 104:104 <> g:6
+R122:125 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R121:121 generated_proof_20250305_232916 <> A:3 var
+R126:126 generated_proof_20250305_232916 <> B:4 var
+binder 117:117 <> f:7
+R134:134 generated_proof_20250305_232916 <> A:3 var
+binder 130:130 <> x:8
+R139:139 generated_proof_20250305_232916 <> C:5 var
+R144:144 generated_proof_20250305_232916 <> g:6 var
+R147:147 generated_proof_20250305_232916 <> f:7 var
+R149:149 generated_proof_20250305_232916 <> x:8 var
+R177:180 generated_proof_20250305_232916 <> comp def
+not 163:163 <> :::x_'>>>'_x
+prf 229:235 <> id_comp
+binder 238:238 <> A:9
+binder 240:240 <> B:10
+R249:252 Coq.Init.Logic <> ::type_scope:x_'->'_x not
+R248:248 generated_proof_20250305_232916 <> A:9 var
+R253:253 generated_proof_20250305_232916 <> B:10 var
+binder 244:244 <> f:11
+R266:268 Coq.Init.Logic <> ::type_scope:x_'='_x not
+R260:264 generated_proof_20250305_232916 <> :::x_'>>>'_x not
+R258:259 generated_proof_20250305_232916 <> id def
+R265:265 generated_proof_20250305_232916 <> f:11 var
+R269:269 generated_proof_20250305_232916 <> f:11 var

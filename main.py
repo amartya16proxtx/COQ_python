@@ -5,7 +5,6 @@ from dotenv import load_dotenv
 import subprocess
 from datetime import datetime
 
-
 load_dotenv()  # Load environment variables from .env file
 GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
 
@@ -13,7 +12,6 @@ if not GOOGLE_API_KEY:
     raise ValueError("Google API key not found. Set it in the .env file.")
 
 genai.configure(api_key=GOOGLE_API_KEY)
-
 
 # Load the combined dataset
 dataset2 = load_dataset('parquet', data_files='./combined_dataset.parquet')
@@ -32,10 +30,6 @@ if not matching_rows:
 proof_details = matching_rows[0]['Output']
 print("\nProof and details:", proof_details)
 
-# Set up Gemini API
-GOOGLE_API_KEY = GOOGLE_API_KEY  # Replace with your API key
-genai.configure(api_key=GOOGLE_API_KEY)
-
 # Gemini prompt
 prompt = f"""
 I have the following theorem and proof in Coq:
@@ -49,11 +43,9 @@ Proof details:
 Generate the full Coq 8.20 code required to prove this theorem.
 Ensure that:
 1. **Use `From Cdcl Require Import Lib Syntax Lit.` correctly.**
-3. The Coq script should be self-contained and verifiable in Coq without requiring additional manual fixes.
-4. The output should contain **only valid Coq code**, with no explanations.
+2. The Coq script should be self-contained and verifiable in Coq without requiring additional manual fixes.
+3. The output should contain **only valid Coq code**, with no explanations.
 """
-
-
 
 # Generate response
 model = genai.GenerativeModel("gemini-1.5-pro-002")  # Use this instead
@@ -62,11 +54,6 @@ response = model.generate_content(prompt)
 # Display Coq Code
 print("\nGenerated Coq Code:\n")
 print(response.text)
-
-
-# Save the generated Coq code to a file
-
-import re
 
 # Extract only valid Coq code
 coq_code_lines = response.text.split("\n")
@@ -88,10 +75,6 @@ for line in coq_code_lines:
 # Join cleaned Coq code
 coq_code = "\n".join(cleaned_code)
 
-
-print("\n✅ Cleaned Coq code saved to generated_proof.v")
-
-
 # Create the 'verification' folder if it doesn't exist
 os.makedirs("verification", exist_ok=True)
 
@@ -105,3 +88,17 @@ with open(file_path, "w") as f:
     f.write(coq_code)
 
 print(f"\n✅ Cleaned Coq code saved to {file_path}")
+
+# --- Coq Verification ---
+print("\n🔍 Running Coq verification...")
+
+coqc_command = ["coqc", file_path]
+verification_log = os.path.join("verification", f"verification_log_{timestamp}.txt")
+
+with open(verification_log, "w") as log_file:
+    try:
+        result = subprocess.run(coqc_command, check=True, stdout=log_file, stderr=log_file, text=True)
+        print(f"✅ Coq verification successful! The proof is valid.\n")
+    except subprocess.CalledProcessError:
+        print(f"❌ Coq verification failed! Check {verification_log} for details.\n")
+
